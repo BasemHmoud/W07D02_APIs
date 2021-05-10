@@ -11,7 +11,10 @@ const todos  = [
      isCompleted: false
     }];
 
-
+    app.get("/todos", (req, res) => {
+        res.status(200);
+        res.send(todos);
+      });
 app.listen(port,()=>{
     console.log(`server run on ${port}`);
 }) 
