@@ -1,17 +1,72 @@
-const express=require("express");
+const express = require("express");
 
-const app=express();
+const app = express();
+const port = 3000;
 
-const port=3000;
+app.use(express.json());
+
 const users = [
-    { name: "John", age: 25 },
-    { name: "Jane", age: 20 },
-    { name: "Mark", age: 19 },
-  ];
+  { name: "Ali", age: 30 },
+  { name: "Ala", age: 20 },
+];
 
-app.get("/home",(req,res)=>{
-    res.send(users)
+app.get("/home", (req, res) => {
+  res.status(200);
+  res.json("hi from server");
+});
+
+app.get("/", (req, res) => {
+  res.send("hi home page");
+});
+
+app.get("/users", (req, res) => {
+  res.status(200);
+  res.send(users);
+});
+
+app.post("/create/user", (req, res) => {
+  const name = req.body.name;
+  const age = req.body.age;
+    // const user = { name: name, age: age };
+    const person = { name, age };
+
+  users.push(person);
+
+  res.status(201);
+  res.json(person);
+});
+//params
+app.get("/user/:x",(req,res)=>{
+    const person_name = req.params.x
+
+    res.json(person_name);
 })
-app.listen(port,()=>{
-    console.log(`server run on ${port}`);
+
+
+
+//query
+app.get("/user",(req,res)=>{
+    const person_name = req.query.x
+    // const age = req.query.age
+    let i;
+    const found = users.find((element,index)=>{
+        i=index;
+        return element.name=== person_name;
+    })
+
+    if(found){
+        res.status(200);
+        res.json(i)
+    }
+    else{
+        res.status(404);
+        res.json("user not found")
+    }
+
+    
 })
+
+
+app.listen(port, () => {
+  console.log(`server run on port ${port}`);
+});
