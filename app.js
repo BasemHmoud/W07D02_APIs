@@ -16,7 +16,7 @@ app.get("/home", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("hi home page");
+  res.send("hello world");
 });
 
 app.get("/users", (req, res) => {
@@ -76,3 +76,6 @@ app.get("/user",(req,res)=>{
 app.listen(port, () => {
   console.log(`server run on port ${port}`);
 });
+// بالنسبة للسوال الخامس في حال تشغيل السيرفر على المتصفح 
+//سوف يقوم باخراج hello world
+// لا يختلف المتصفح عن postman
