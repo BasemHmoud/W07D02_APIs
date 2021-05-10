@@ -35,6 +35,12 @@ app.post("/create/user", (req, res) => {
   res.status(201);
   res.json(person);
 });
+app.post("/first-user", (req, res) => {
+    const fu=users[0];
+    res.json(fu);
+  
+   
+  });
 //params
 app.get("/user/:x",(req,res)=>{
     const person_name = req.params.x
