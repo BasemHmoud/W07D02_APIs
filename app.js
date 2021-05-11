@@ -1,16 +1,3 @@
-/*
-      app.post("/create/todo",(req,res)=>{
-          const todo1=req.body.todo;
-          const isCompletede1=req.body.isCompleted
-          const add={todo:todo1,isCompleted:isCompletede1}
-          todos.push(add)
-          res.status(201);
-          res.json(add);
-      })
-      
-app.listen(port,()=>{
-    console.log(`server run on ${port}`);
-}) */
 const express = require("express");
 const app = express();
 const port = 3000;
@@ -29,7 +16,7 @@ app.post("/create/todo", (req, res) => {
   const todo1 = req.body.todo;
   const isCompleted1 = req.body.isCompleted;
   // const user = { name: name, age: age };
-  const person = { todo:todo1, isCompleted:isCompleted1 };
+  const person = { todo: todo1, isCompleted: isCompleted1 };
 
   todos.push(person);
 
@@ -37,6 +24,23 @@ app.post("/create/todo", (req, res) => {
   res.json(person);
 });
 
+app.put("/update/todo/:name", (req, res) => {
+  let i;
+  const person = { todo: req.body.todo, isCompleted: req.body.isCompleted };
+  const found = todos.find((element, index) => {
+    i = index;
+    return element.todo === req.params.name;
+  });
+
+  if (found) {
+    res.status(200);
+    todos[i] = person;
+    res.json(person);
+  } else {
+    res.status(404);
+    res.json("user not found");
+  }
+});
 app.listen(port, () => {
   console.log(`server run on ${port}`);
 });
