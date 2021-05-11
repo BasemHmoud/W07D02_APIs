@@ -38,9 +38,27 @@ app.put("/update/todo/:name", (req, res) => {
     res.json(person);
   } else {
     res.status(404);
-    res.json("user not found");
+    res.json("todo not found");
+  }
+});
+
+app.delete("/delete/todo/:name", (req, res) => {
+  let i;//
+  const deltodo = req.params.name;//
+  const found = todos.find((element, index) => {//
+    i = index;//
+    return element.todo === deltodo;//
+  });
+  if (found) {
+    res.status(200);
+    todos.splice(i, 1);
+
+    res.json(person);
+  } else {
+    res.status(404);
+    res.json("todo not found");
   }
 });
 app.listen(port, () => {
-  console.log(`server run on ${port}`);
+  console.log(`server run on port ${port}`);
 });
