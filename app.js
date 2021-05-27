@@ -77,7 +77,20 @@ app.put("/complete/todo/:name", (req, res) => {
     res.json("todo not found ");
   }
 });
-
+ 
+app.get("/completed/todos",(req,res)=>{
+  const complete =todos.filter((element,i)=>{
+    return element.isCompleted===true
+  })
+  if(complete){
+    res.status(200)
+    res.json(complete)
+  }
+  else{
+    res.status(404);
+    res.json("no")
+  }
+})
 app.listen(port, () => {
   console.log(`server run on port ${port}`);
 });
